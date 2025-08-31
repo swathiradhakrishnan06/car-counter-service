@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     database_user: str
 
     class Config:
-        env_file = ".env"
+        env_file = ".env.example"
 
 
 settings = Settings()
