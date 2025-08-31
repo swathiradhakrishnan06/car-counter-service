@@ -15,9 +15,9 @@ test:
 	# run tests
 	python -m pytest -vv --cov=app --cov-report term-missing tests/test_*.py
 
-
 build:
 	# build the package
+	docker build -t deploy-traffic-counter .
 
 deploy:
 	# deploy the package
