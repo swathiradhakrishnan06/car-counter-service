@@ -22,15 +22,23 @@ def top_n_half_hours(df: pd.DataFrame, n: int = 3) -> List[Tuple[str, int]]:
     return [(ts.isoformat(), count) for ts, count in zip(top['timestamp'], top['car_count'])]
 
 def least_n_contiguous_half_hours(df: pd.DataFrame, n: int = 3) -> Tuple[List[str], int]:
-    """Returns the n contiguous half hour records with the least car counts."""
+    """Returns the n contiguous half-hour records with the least car counts,
+    ensuring timestamps are consecutive (30-minute intervals)."""
     min_total = None
     min_period = []
 
-    df_sorted = df.sort_values('timestamp').reset_index(drop=True)
+    df_sorted = df.sort_values("timestamp").reset_index(drop=True)
     for i in range(len(df_sorted) - n + 1):
-        period = df_sorted.iloc[i:i+n]
-        total = int(period['car_count'].sum())
+        period = df_sorted.iloc[i : i + n]
+
+        # Check if timestamps are contiguous
+        deltas = period["timestamp"].diff().iloc[1:]  # skip first NaT
+        if not all(deltas == pd.Timedelta(minutes=30)):
+            continue  # skip non-contiguous period
+
+        total = int(period["car_count"].sum())
         if min_total is None or total < min_total:
             min_total = total
-            min_period = [ts.isoformat() for ts in period['timestamp']]
+            min_period = [ts.isoformat() for ts in period["timestamp"]]
+
     return min_period, min_total if min_total is not None else 0

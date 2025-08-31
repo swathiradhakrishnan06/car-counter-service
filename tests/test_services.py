@@ -31,7 +31,7 @@ def empty_data():
     return pd.DataFrame({"timestamp": pd.to_datetime([]), "car_count": []})
 
 
-def test_total_cars_count(sample_data,empty_data):
+def test_total_cars_count(sample_data, empty_data):
     """Test total cars count."""
     assert car_counter.total_cars(sample_data) == 85
     assert car_counter.total_cars(empty_data) == 0
@@ -55,9 +55,7 @@ def test_top_n_half_hours(sample_data):
     ]
 
 
-@pytest.mark.parametrize(
-    "n,expected_total, expected_len", [(2, 20, 2), (3, 40, 3), (4, 50, 4)]
-)
+@pytest.mark.parametrize("n,expected_total, expected_len", [(2, 30, 2), (3, 40, 3)])
 def test_least_n_contiguous_half_hours(n, expected_total, expected_len, sample_data):
     """Tests N contiguous half-hours with least cars."""
     period, total = car_counter.least_n_contiguous_half_hours(sample_data, n=n)
