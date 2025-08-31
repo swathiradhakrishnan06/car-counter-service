@@ -1,3 +1,5 @@
+# pylint: disable=redefined-outer-name
+
 import pytest
 import pandas as pd
 from app.services import car_counter
