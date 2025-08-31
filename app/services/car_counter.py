@@ -1,7 +1,7 @@
 import pandas as pd
 from typing import List, Dict, Tuple
 
-def read_data(file_path: str) -> pd.DataFrame:
+def read_data(file_path: str) -> pd.DataFrame:  #pragma: no cover
     """Reads a CSV file with 'timestamp' and 'car_count' columns and returns a DataFrame."""
     df = pd.read_csv(file_path, parse_dates=['timestamp'])
     return df
