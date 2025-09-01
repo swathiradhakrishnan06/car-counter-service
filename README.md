@@ -75,8 +75,6 @@ pip install -r requirements.txt
 uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
 ```
 
-Access the docs at: [http://localhost:8080/docs](http://localhost:8080/docs)
-
 ### 3. Docker
 
 ```bash
