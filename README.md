@@ -39,6 +39,9 @@ car-counter-service/
 ├── app/
 │   ├── main.py          # FastAPI application
 │   ├── __init__.py
+│   ├── config.py         # env vars via pydantic-settings
+│   ├── database.py          # Database configuration
+│   ├── models.py         
 │   ├── services/        # Business logic
 │   │   └── car_counter.py
 │   └── routers/         # FastAPI endpoints
@@ -85,6 +88,10 @@ docker run -p 8080:8080 car-counter-service
 
 ## **Endpoints**
 
+![alt text](image.png)
+
+Visit the API docs at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+
 | Endpoint                                | Method | Description                                        |
 | --------------------------------------- | ------ | -------------------------------------------------- |
 | `/cars/upload`                          | POST   | Upload CSV file & get traffic summary              |
@@ -130,3 +137,25 @@ pylint --disable=R,C **/*.py
   * Docker image build
 
 ---
+
+## Enhancements (Planned)
+
+1. **Database Integration**
+
+   * Replace in-memory storage with **PostgreSQL** (via SQLAlchemy).
+   * Insert uploaded data directly into DB and query via endpoints.
+   * ✅ Work in progress: available on `dev` branch.
+
+2. **Big Data Support**
+
+   * Migrate computation-heavy queries to **Apache Spark** for handling datasets of 100k+ rows efficiently.
+
+3. **Cloud Deployment**
+
+   * Deploy service on **AWS Lambda** (serverless) or **AWS ECS** (containerized).
+   * Use CI/CD pipeline for automated deployment.
+
+## Branch Strategy
+
+* `main`: stable version with in-memory DataFrame.
+* `dev`: ongoing DB integration + updated tests.
