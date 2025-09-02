@@ -13,7 +13,7 @@ lint:
 
 test:
 	# run tests
-	python -m pytest -vv --cov=app --cov-report term-missing tests/test_*.py
+	python -m pytest -vv --cov=app/services --cov-report term-missing tests/test_*.py
 
 build:
 	# build the package
