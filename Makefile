@@ -1,7 +1,8 @@
 install:
 	# install packages
 	pip install --upgrade pip && \
-		pip install -r requirements.txt
+		pip install -r requirements.txt && \
+			pip install python-multipart
 
 format:
 	# format code
